@@ -1,0 +1,29 @@
+import time
+
+SAFE_DISTANCE = 20
+
+# Main loop : Sense -> Decide -> Act
+while True:
+
+    # STEP 1: SENSE - taking current distance from sensor
+    distance = get_sensor_distance()   # this give function sensor reading
+
+    # STEP 2: DECIDE - if-else to decide 
+    if distance > SAFE_DISTANCE:
+        # STEP 3: ACT - No obstacle, both motor forward
+        left_motor_speed = 100
+        right_motor_speed = 100
+        print("No obstacle. Moving forward. Distance =", distance)
+
+    else:
+        # STEP 3: ACT - There is Obstacle, so using STOP
+        left_motor_speed = 0
+        right_motor_speed = 0
+        print("Obstacle detected! Stopping. Distance =", distance)
+
+        time.sleep(1)   # wait then again turn on
+
+        # Now TURN On (one motor forward, one backward = robot will turn)
+        left_motor_speed = 100
+        right_motor_speed = -100
+        print("Turning to avoid obstacle...")
